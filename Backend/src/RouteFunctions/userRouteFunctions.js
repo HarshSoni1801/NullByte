@@ -134,7 +134,12 @@ const logout=async (req,res)=>{
          const payload=jwt.decode(token);
          await redisClient.set('token:'+token,'blocked'); // blocking the user by setting a key in Redis
          await redisClient.expireAt('token:'+token,payload.exp);// setting the token to expire in 1 hour
-         res.cookie('token',token,{maxAge:0})// clearing the cookie by setting maxAge to 0
+         res.cookie('token', token, {
+  maxAge: 0,
+  httpOnly: true,
+  secure: 'true', // Only HTTPS in production
+  sameSite: 'none',
+});
          res.send("User logged out successfully");
    }
    catch(err){
