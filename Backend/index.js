@@ -11,6 +11,8 @@ const byteBuddyRouter=require('./src/routes/byteBuddyRoutes');
 const solutionVideoRouter=require('./src/routes/solutionVideoRoutes');
 const cors = require('cors');
 
+app.set('trust proxy', 1);
+
 app.use(cors({
   origin: [
     "http://localhost:5173",
