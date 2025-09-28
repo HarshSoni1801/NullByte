@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@plugin "daisyui";
+.disabled-option {
+   cursor: not-allowed;
+   opacity: 0.7;
+ }
+ 
+ /* Smooth transitions for dropdown */
+ .dropdown-content {
+   transition: opacity 0.2s ease, transform 0.2s ease;
+ }
+ 
+ /* Visual indicator for admin user */
+ .admin-badge {
+   font-size: 0.7rem;
+   padding: 0.15rem 0.5rem;
+ }
+
+ @keyframes fade-in {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards, pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.9), 0 0 50px rgba(59, 130, 246, 0.7);
+  }
+}
+.scroll-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-custom::-webkit-scrollbar-track {
+  background: rgba(39, 39, 42, 0.3);
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+  background: rgba(82, 82, 91, 0.8);
+  border-radius: 3px;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb:hover {
+  background: rgba(113, 113, 122, 0.8);
+}
+button:hover{
+  cursor: pointer;
+}
+select:hover{
+  cursor: pointer;
+}
+html, body {
+  overflow-x: hidden;
+}
