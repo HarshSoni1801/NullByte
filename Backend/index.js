@@ -1,14 +1,14 @@
 const express=require('express');
 require('dotenv').config();//for reading env file
 const app=express();
-const main=require('./config/db');
+const main=require('./src/config/db');
 const cookieParser=require('cookie-parser');
-const userRouter=require("./routes/userRoutes");
-const problemRouter=require("./routes/problemRoutes");
-const redisClient = require('./config/redisDb');
-const codeSubmissionRouter=require('./routes/codeSubmissionRoutes');
-const byteBuddyRouter=require('./routes/byteBuddyRoutes');
-const solutionVideoRouter=require('./routes/solutionVideoRoutes');
+const userRouter=require("./src/routes/userRoutes");
+const problemRouter=require("./src/routes/problemRoutes");
+const redisClient = require('./src/config/redisDb');
+const codeSubmissionRouter=require('./src/routes/codeSubmissionRoutes');
+const byteBuddyRouter=require('./src/routes/byteBuddyRoutes');
+const solutionVideoRouter=require('./src/routes/solutionVideoRoutes');
 const cors = require('cors');
 
 app.use(cors({
