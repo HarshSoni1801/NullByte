@@ -12,7 +12,10 @@ const solutionVideoRouter=require('./src/routes/solutionVideoRoutes');
 const cors = require('cors');
 
 app.use(cors({
-   origin: 'https://nullbyte-frontend.onrender.com', // Replace with your frontend URL
+     origin: [
+    "http://localhost:5173",  // Keep for development
+    "https://nullbyte-frontend.onrender.com"  // Add production URL
+  ], // Replace with your frontend URL
    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }))
 app.use(express.json());//Convert incoming JSON requests to JavaScript objects
