@@ -24,7 +24,13 @@ const register = async (req, res) => {
     
     const token = jwt.sign({ _id: user._id, emailId, role: user.role }, process.env.JWT_KEY, { expiresIn: 60 * 60 * 24 * 30 });
     
-    res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 24 * 30 });
+    res.cookie('token', token, {
+  maxAge: 1000 * 60 * 60 * 24 * 30,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Cross-site cookies
+  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+});
     res.status(200).json({
       user: userData,
       message: "User created successfully",
@@ -74,7 +80,13 @@ const adminRegister=async (req,res)=>{
 
       const user=await userCollection.create(req.body);// this will create a new user in the database
       const token=jwt.sign({_id:user._id,emailId,role},process.env.JWT_KEY,{expiresIn:60*60*24*30})// creating a JWT token with 1 hour expiration time and signing it with a secret key
-      res.cookie('token',token,{maxAge:1000*60*60*24*30})// setting the cookie with the token and 1 hour expiration time
+      res.cookie('token', token, {
+  maxAge: 1000 * 60 * 60 * 24 * 30,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Cross-site cookies
+  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+});// setting the cookie with the token and 1 hour expiration time
       res.status(201).send("User registered successfully")// sending the response with the user details and token
    }
    catch(err){
@@ -102,7 +114,13 @@ const login=async (req,res)=>{
          role: user.role, // Include the role in the user data
       }
       const token=jwt.sign({_id:user._id,emailId},process.env.JWT_KEY,{expiresIn:60*60*24*30})// creating a JWT token with 30 days expiration time and signing it with a secret key
-      res.cookie('token',token,{maxAge:1000*60*60*24*30})// setting the cookie with the token and 30 days expiration time
+      res.cookie('token', token, {
+  maxAge: 1000 * 60 * 60 * 24 * 30,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Cross-site cookies
+  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+});// setting the cookie with the token and 30 days expiration time
       res.status(200).json({
          user: userData, // sending the user data in the response
          message: "User logged in successfully",
@@ -171,7 +189,13 @@ const guestLogin = async (req, res) => {
     );
 
     // Set token cookie
-    res.cookie('token', token, { maxAge: 1000 * 60 * 60 * 24 * 30 });
+    res.cookie('token', token, {
+  maxAge: 1000 * 60 * 60 * 24 * 30,
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production', // Only HTTPS in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Cross-site cookies
+  domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+});;
 
     return res.status(200).json({
       user: userData,
