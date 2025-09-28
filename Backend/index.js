@@ -12,12 +12,15 @@ const solutionVideoRouter=require('./src/routes/solutionVideoRoutes');
 const cors = require('cors');
 
 app.use(cors({
-     origin: [
-    "http://localhost:5173",  // Keep for development
-    "https://nullbyte-frontend.onrender.com"  // Add production URL
-  ], // Replace with your frontend URL
-   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://nullbyte-frontend.onrender.com"
+  ],
+  credentials: true, // ✅ Essential for cookies
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
+  exposedHeaders: ["Set-Cookie"] // ✅ Allow frontend to see Set-Cookie headers
+}));
 app.use(express.json());//Convert incoming JSON requests to JavaScript objects
 app.use(cookieParser());//parses the Cookie header and makes the cookies available as an object on req.cookies
 app.use('/user',userRouter);//mounts the userAuth router on the /user path
